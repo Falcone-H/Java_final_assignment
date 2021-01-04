@@ -1,18 +1,23 @@
 package front;
 
+import back.Executor;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class main_page extends JFrame {
     private JLabel label;
     private Container container;
+    private Executor executor;
 
-    main_page() {
+    main_page(Executor executor) {
         setTitle("用户管理系统");
         setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);    // 居中显示
         setResizable(false);    // 不可调节窗口大小
+
+        this.executor = executor;
 
         // 创建对象
         init();
