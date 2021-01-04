@@ -1,5 +1,7 @@
 package back;
+
 import Utils.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +24,7 @@ public class Executor {
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, account);
         resultSet = preparedStatement.executeQuery();
-        if(resultSet.next()) {
+        if (resultSet.next()) {
             return true;
         } else {
             return false;
@@ -36,7 +38,7 @@ public class Executor {
         preparedStatement.setString(1, account);
         preparedStatement.setString(2, password);
         resultSet = preparedStatement.executeQuery();
-        if(resultSet.next()) {
+        if (resultSet.next()) {
             user.setId(resultSet.getInt("id"));
             user.setName(resultSet.getString("name"));
             user.setAccount(resultSet.getString("account"));
@@ -50,7 +52,17 @@ public class Executor {
     }
 
     // 注册
-    public boolean register() {
-        return false;
+    public boolean register(String username, String account, String password, int sex) throws SQLException {
+        String sql = "insert into user_info (name, account, password, sex) values (?, ?, ?, ?)";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, account);
+        preparedStatement.setString(3, password);
+        preparedStatement.setInt(4, sex);
+        int count = preparedStatement.executeUpdate();
+        if(count != 0)
+            return true;
+        else
+            return false;
     }
 }

@@ -84,42 +84,44 @@ public class login_page extends JFrame implements ActionListener {
         login_button.setFont(font_normal);
         register_button.setFont(font_normal);
 
-        account_input.addFocusListener(new FocusListener() {
+        account_input.addFocusListener(new FocusListener() {    // 账号框获取焦点和失去焦点时的动作
             String hint_text = "请输入6位的账号";
+
             @Override
             public void focusGained(FocusEvent e) {
-                if(account_input.getText().equals(hint_text))
+                if (account_input.getText().equals(hint_text))
                     account_input.setText("");
                 account_input.setForeground(Color.BLACK);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if(account_input.getText().equals(""))
+                if (account_input.getText().equals(""))
                     account_input.setText("请输入6位的账号");
                 account_input.setForeground(Color.GRAY);
             }
         });
-        password_input.addFocusListener(new FocusListener() {
+        password_input.addFocusListener(new FocusListener() {   // 密码框获取焦点和失去焦点时的动作
             String hint_text = "请输入6位的密码";
+
             @Override
             public void focusGained(FocusEvent e) {
-                if(password_input.getText().equals(hint_text))
+                if (password_input.getText().equals(hint_text))
                     password_input.setText("");
                 password_input.setForeground(Color.BLACK);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if(password_input.getText().equals(""))
+                if (password_input.getText().equals(""))
                     password_input.setText("请输入6位的密码");
                 password_input.setForeground(Color.GRAY);
             }
         });
-        password_input.addKeyListener(new KeyAdapter() {
+        password_input.addKeyListener(new KeyAdapter() {    // 密码框按回车键时的动作
             @Override
             public void keyTyped(KeyEvent e) {
-                if((char)e.getKeyChar() == KeyEvent.VK_ENTER) {
+                if ((char) e.getKeyChar() == KeyEvent.VK_ENTER) {
                     try {
                         loginAction();
                     } catch (SQLException throwables) {
@@ -140,13 +142,13 @@ public class login_page extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {    // 添加按钮动作
-        if(e.getSource() == login_button) {
+        if (e.getSource() == login_button) {
             try {
                 loginAction();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-        } else if(e.getSource() == register_button) {
+        } else if (e.getSource() == register_button) {
             registerAction();
         }
     }
@@ -154,27 +156,27 @@ public class login_page extends JFrame implements ActionListener {
     public void loginAction() throws SQLException {
         String account = account_input.getText();
         String password = password_input.getText();
-        if(account.length() != 6) {     // 账号不为六位
+        if (account.length() != 6) {     // 账号不为六位
             JOptionPane.showMessageDialog(this, "请输入长度为六位的账号",
                     "警告", JOptionPane.WARNING_MESSAGE);
             account_input.setText("");
             password_input.setText("");
             return;
         }
-        if(password.length() != 6) {    // 密码不为六位
+        if (password.length() != 6) {    // 密码不为六位
             JOptionPane.showMessageDialog(this, "请输入长度为六位的密码",
                     "警告", JOptionPane.WARNING_MESSAGE);
             password_input.setText("");
             return;
         }
-        if(!verifyAccount(account)) {    // 该账号不存在
+        if (!verifyAccount(account)) {    // 该账号不存在
             JOptionPane.showMessageDialog(this, "该账号不存在，请先注册",
                     "警告", JOptionPane.WARNING_MESSAGE);
             account_input.setText("");
             password_input.setText("");
             return;
         }
-        if(!verifyPassword(account, password)) { // 如果密码不正确
+        if (!verifyPassword(account, password)) { // 如果密码不正确
             JOptionPane.showMessageDialog(this, "密码有误，请重新输入",
                     "警告", JOptionPane.WARNING_MESSAGE);
             password_input.setText("");
