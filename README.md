@@ -11,9 +11,16 @@ The java final assignment
 * 用户名
 * 性别
 * 编号
-* 简介
-* 头像
+* 简介（未实现）
+* 头像（未实现）
 * 显示所有用户的信息
+
+3、注册页(register_page.class)
+
+* 用户名
+* 账号
+* 密码
+* 性别
 
 ## 后端
 1、数据库配置(`druid_util.class`)
