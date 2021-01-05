@@ -65,4 +65,17 @@ public class Executor {
         else
             return false;
     }
+
+    // 获取当前用户信息
+    public User getUserInfo() {
+        return user;
+    }
+
+    // 获取所有用户的信息
+    public ResultSet getAllUserInfo() throws SQLException {
+        String sql = "select * from user_info";
+        preparedStatement = connection.prepareStatement(sql);
+        resultSet = preparedStatement.executeQuery();
+        return resultSet;
+    }
 }
